@@ -1,0 +1,32 @@
+---
+// BaseLayout.astro
+import Head from "@components/_head.astro";
+import Footer from "@components/dashboard/_footer.astro";
+import Topbar from "@components/dashboard/_topbar.astro";
+import Sidebar from "@components/dashboard/_sidenav.astro";
+import Scripts from "@components/_scripts.astro";
+
+const { title, path = "/adminlte/", mainPage, page } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <Head title={title} path={path} />
+  </head>
+  <body class="sidebar-mini layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
+      <Topbar path={path} />
+      <Sidebar path={path} mainPage={mainPage} page={page} />
+      <main class="app-main">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <Scripts path={path} />
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: true });
+    </script>    
+  </body>
+</html>

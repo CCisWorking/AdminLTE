@@ -1,0 +1,1905 @@
+{
+  "type": "VisionTransformer",
+  "params": "",
+  "children": [
+    {
+      "type": "PatchEmbed",
+      "params": "",
+      "children": [
+        {
+          "type": "Conv2d",
+          "params": {
+            "in_channels": 3,
+            "out_channels": 768,
+            "kernel_size": [
+              14,
+              14
+            ],
+            "stride": [
+              14,
+              14
+            ],
+            "padding": [
+              0,
+              0
+            ],
+            "bias": true
+          },
+          "name": "proj"
+        },
+        {
+          "type": "Identity",
+          "params": {},
+          "name": "norm"
+        }
+      ],
+      "name": "patch_embed"
+    },
+    {
+      "type": "Dropout",
+      "params": {
+        "p": 0.0,
+        "inplace": false
+      },
+      "name": "pos_drop"
+    },
+    {
+      "type": "Identity",
+      "params": {},
+      "name": "patch_drop"
+    },
+    {
+      "type": "Identity",
+      "params": {},
+      "name": "norm_pre"
+    },
+    {
+      "type": "Sequential",
+      "params": "",
+      "children": [
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "0"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "1"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "2"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "3"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "4"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "5"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "6"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "7"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "8"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "9"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "10"
+        },
+        {
+          "type": "Block",
+          "params": "",
+          "children": [
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm1"
+            },
+            {
+              "type": "Attention",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 2304,
+                    "bias": true
+                  },
+                  "name": "qkv"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "q_norm"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "k_norm"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "attn_drop"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "proj"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "proj_drop"
+                }
+              ],
+              "name": "attn"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls1"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path1"
+            },
+            {
+              "type": "LayerNorm",
+              "params": {
+                "normalized_shape": [
+                  768
+                ],
+                "eps": 1e-06,
+                "elementwise_affine": true
+              },
+              "name": "norm2"
+            },
+            {
+              "type": "Mlp",
+              "params": "",
+              "children": [
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 768,
+                    "out_features": 3072,
+                    "bias": true
+                  },
+                  "name": "fc1"
+                },
+                {
+                  "type": "GELU",
+                  "params": "",
+                  "name": "act"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop1"
+                },
+                {
+                  "type": "Identity",
+                  "params": {},
+                  "name": "norm"
+                },
+                {
+                  "type": "Linear",
+                  "params": {
+                    "in_features": 3072,
+                    "out_features": 768,
+                    "bias": true
+                  },
+                  "name": "fc2"
+                },
+                {
+                  "type": "Dropout",
+                  "params": {
+                    "p": 0.0,
+                    "inplace": false
+                  },
+                  "name": "drop2"
+                }
+              ],
+              "name": "mlp"
+            },
+            {
+              "type": "LayerScale",
+              "params": "",
+              "name": "ls2"
+            },
+            {
+              "type": "Identity",
+              "params": {},
+              "name": "drop_path2"
+            }
+          ],
+          "name": "11"
+        }
+      ],
+      "name": "blocks"
+    },
+    {
+      "type": "LayerNorm",
+      "params": {
+        "normalized_shape": [
+          768
+        ],
+        "eps": 1e-06,
+        "elementwise_affine": true
+      },
+      "name": "norm"
+    },
+    {
+      "type": "Identity",
+      "params": {},
+      "name": "fc_norm"
+    },
+    {
+      "type": "Dropout",
+      "params": {
+        "p": 0.0,
+        "inplace": false
+      },
+      "name": "head_drop"
+    },
+    {
+      "type": "Identity",
+      "params": {},
+      "name": "head"
+    }
+  ]
+}

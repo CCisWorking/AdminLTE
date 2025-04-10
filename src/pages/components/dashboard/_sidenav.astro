@@ -1,0 +1,67 @@
+---
+// src/components/dashboard/_sidenav.astro
+import { getProjectsWithVersions } from "../../../utils/db.server.js";
+const { path = "", mainPage = "", page = "" } = Astro.props;
+const projects = await getProjectsWithVersions();
+---
+
+<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+  <div class="sidebar-brand">
+    <a href="/" class="brand-link">
+      <img
+        src="/adminlte/img/AdminLTELogo.png"
+        alt="AdminLTE Logo"
+        class="brand-image opacity-75 shadow"
+      />
+      <span class="brand-text fw-light">Vitness</span>
+    </a>
+  </div>
+
+  <div class="sidebar-wrapper">
+    <nav class="mt-2">
+      <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
+        <!-- Dashboard -->
+        <li class:list={["nav-item", mainPage === "dashboard" && "menu-open"]}>
+          <a href="#" class:list={["nav-link", mainPage === "dashboard" && "active"]}>
+            <i class="nav-icon bi bi-speedometer"></i>
+            <p>Function<i class="nav-arrow bi bi-chevron-right"></i></p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/" class:list={["nav-link", page === "index" && "active"]}>
+                <i class="nav-icon bi bi-circle"></i>
+                <p>show</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Dynamic Projects -->
+        {projects.map((project) => (
+          <li class:list={["nav-item", mainPage === `project-${project.projectname}` && "menu-open"]}>
+            <a href="#" class:list={["nav-link", mainPage === `project-${project.projectname}` && "active"]}>
+              <i class="nav-icon bi bi-folder"></i>
+              <p>
+                {project.projectname}
+                <i class="nav-arrow bi bi-chevron-right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              {project.versions.map((versionname) => (
+                <li class="nav-item">
+                  <a
+                    href={`/projects/${project.projectname}?version=${versionname}`}
+                    class:list={["nav-link", page === `version-${versionname}` && "active"]}
+                  >
+                    <i class="nav-icon bi bi-circle"></i>
+                    <p>{versionname}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</aside>

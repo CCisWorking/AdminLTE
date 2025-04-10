@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../pages/layout/BaseLayout.astro";
+import { getModelByProjectAndVersion } from "../../utils/db.server.js";
+import ModelFlowWrapper from "../../components/ModelFlowWrapper.jsx";
+
+const { id: projectname } = Astro.params;
+const url = new URL(Astro.request.url);
+const versionname = url.searchParams.get("version");
+// console.log('🌈 projectname:', projectname);      
+// console.log('🌈 versionname:', versionname);   
+
+const model = await getModelByProjectAndVersion(projectname, versionname);
+console.log('📋 model:', model);
+const architecture = model.architecture;
+
+if (!model || typeof architecture !== 'object' || architecture === null) {
+  return new Response("Invalid model or architecture", { status: 404 });
+}
+---
+
+<BaseLayout title={`Model Architecture: ${projectname}`} mainPage={`project-${projectname}`} page={`version-${versionname}`}>
+  <div class="container py-4">
+    <h1>Model: {projectname}</h1>
+    <p><strong>Version:</strong> {versionname}</p>
+    <ModelFlowWrapper architecture={architecture} client:load />
+  </div>
+</BaseLayout>

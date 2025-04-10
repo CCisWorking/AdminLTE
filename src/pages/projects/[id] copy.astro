@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../pages/layout/BaseLayout.astro';
+import { getProjectsWithVersions } from '../../utils/db.server.js';
+
+const { id: projectname } = Astro.params;
+const url = new URL(Astro.request.url);
+const versionname = url.searchParams.get('version') || 'latest';
+
+const projects = await getProjectsWithVersions();
+const project = projects.find((p) => p.projectname === projectname);
+
+if (!project) {
+  return new Response('Project not found', { status: 404 });
+}
+
+// 设置 sidebar 的状态：展开哪个 project，哪个 version 高亮
+const mainPage = `project-${projectname}`;
+const page = `version-${versionname}`;
+---
+
+<BaseLayout mainPage={mainPage} page={page}>
+  <div class="container-fluid py-4">
+    <h1 class="mb-3">Project: {project.projectname}</h1>
+    <p><strong>Selected version:</strong> {versionname}</p>
+  </div>
+</BaseLayout>
